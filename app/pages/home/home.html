@@ -1,14 +1,15 @@
 <ion-header>
-  <ion-navbar>
+  <ion-toolbar primary>
     <ion-title>Stay Motivated</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="home">
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-  <ion-card *ngFor="let qoute of qoutes">
+  <ion-card class="card-top" *ngFor="let qoute of qoutes">
     <ion-card-content >
        {{ qoute.title }}
+       <i> <b>-- {{ qoute.author }} </b></i>
     </ion-card-content>
   </ion-card>
 </ion-content>
