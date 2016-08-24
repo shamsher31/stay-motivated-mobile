@@ -37,6 +37,6 @@
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [],
-  "name": "ionic-demo-v2",
-  "description": "ionic-demo-v2: An Ionic project"
+  "name": "stay-motivated-mobile",
+  "description": "Stay Motivated Mobile App for Android and iOS"
 }
