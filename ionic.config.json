@@ -1,6 +1,6 @@
 {
-  "name": "ionic-demo-v2",
-  "app_id": "",
+  "name": "stay-motivated-v1",
   "v2": true,
-  "typescript": true
+  "typescript": true,
+  "app_id": "ab77ceb0"
 }

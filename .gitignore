@@ -16,3 +16,4 @@ app/**/*.map
 jspm_packages
 bower_components
 *.log
+*.zip
