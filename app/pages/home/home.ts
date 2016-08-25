@@ -10,7 +10,6 @@ import { QouteService } from './qoute.service';
 })
 export class HomePage implements OnInit {
 
-  private searchQuery: string = '';
   public qoutes: Qoute[];
 
   constructor(private navCtrl: NavController, private qouteService: QouteService) {}
@@ -32,6 +31,10 @@ export class HomePage implements OnInit {
       this.qoutes = this.qoutes.filter((item) => {
         return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
+    }
+
+    if (val.trim() == '') {
+      this.getQoutes();
     }
   }
 }
