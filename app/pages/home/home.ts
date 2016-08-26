@@ -38,4 +38,11 @@ export class HomePage implements OnInit {
       this.getQoutes();
     }
   }
+
+   refreshQoutes(refresher) {
+    setTimeout(() => {
+      this.getQoutes();
+      refresher.complete();
+    }, 2000);
+  }
 }
