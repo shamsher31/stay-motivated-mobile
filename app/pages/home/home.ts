@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from 'ionic-angular';
+import * as _ from 'lodash';
 
 import { Qoute } from './qoute';
 import { QouteService } from './qoute.service';
@@ -15,7 +16,7 @@ export class HomePage implements OnInit {
   constructor(private navCtrl: NavController, private qouteService: QouteService) {}
 
   getQoutes() {
-    this.qouteService.getQoutes().then(qoutes => this.qoutes = qoutes);
+    this.qouteService.getQoutes().then(qoutes => this.qoutes = _.shuffle(qoutes));
   }
 
   ngOnInit() {
