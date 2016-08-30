@@ -11,7 +11,7 @@
   </ion-refresher>
 
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-  <ion-card class="card-top" *ngFor="let qoute of qoutes">
+  <ion-card class="card-top" *ngFor="let qoute of qoutes; trackBy:trackByQoutes">
     <ion-card-content >
        {{ qoute.title }}
        <i> <b>-- {{ qoute.author }} </b></i>

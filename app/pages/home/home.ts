@@ -45,4 +45,8 @@ export class HomePage implements OnInit {
       refresher.complete();
     }, 2000);
   }
+
+  trackByQoutes(index: number, qoute: Qoute) {
+    return qoute.id;
+  }
 }
