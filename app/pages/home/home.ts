@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
     }, 2000);
   }
 
-  trackByQoutes(index: number, qoute: Qoute) {
+  trackByQoutesId(index: number, qoute: Qoute) {
     return qoute.id;
   }
 }
