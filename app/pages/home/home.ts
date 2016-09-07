@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from 'ionic-angular';
+import { SocialSharing } from 'ionic-native';
 import * as _ from 'lodash';
 
 import { Qoute } from './qoute';
@@ -48,5 +49,13 @@ export class HomePage implements OnInit {
 
   trackByQoutesId(index: number, qoute: Qoute) {
     return qoute.id;
+  }
+
+  openSharingOptions(qoute) {
+    SocialSharing.share(qoute.title +' - '+ qoute.author, null, null, null).then(() => {
+      // Success
+    }).catch(() => {
+      // Error!
+    });
   }
 }

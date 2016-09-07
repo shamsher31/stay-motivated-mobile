@@ -16,5 +16,12 @@
        {{ qoute.title }}
        <i> <b>-- {{ qoute.author }} </b></i>
     </ion-card-content>
+    <ion-row no-padding class="removeMargin">
+      <ion-col text-right>
+        <button clear small (click)="openSharingOptions(qoute)">
+          <ion-icon name='share'></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
   </ion-card>
 </ion-content>
