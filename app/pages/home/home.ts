@@ -35,7 +35,7 @@ export class HomePage implements OnInit {
       })
     }
 
-    if (val.trim() == '') {
+    if (val == '') {
       this.getQoutes();
     }
   }

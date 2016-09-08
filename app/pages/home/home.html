@@ -10,7 +10,10 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-searchbar
+    (ionInput)="getItems($event)"
+    (ionClear)="getQoutes()">
+  </ion-searchbar>
   <ion-card class="card-top" *ngFor="let qoute of qoutes; trackBy:trackByQoutesId">
     <ion-card-content >
        {{ qoute.title }}
