@@ -7,7 +7,12 @@
 <ion-content padding class="home">
 
   <ion-refresher (ionRefresh)="refreshQoutes($event)">
-    <ion-refresher-content></ion-refresher-content>
+    <ion-refresher-content
+      pullingIcon="arrow-down"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
   </ion-refresher>
 
   <ion-searchbar
