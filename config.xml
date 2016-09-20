@@ -1,40 +1,47 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.staymotivated.app" android-packageName="com.staymotivated.androidapp" ios-CFBundleIdentifier="com.staymotivated.iosapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>stay-motivated</name>
-  <description>Stay Motivated mobile app.</description>
-  <author email="ansarisam47@gmail.com" href="https://about.me/shamsher/">Stay Motivated Team</author>
-  <content src="index.html"/>
-  <access origin="*"/>
-  <allow-intent href="http://*/*"/>
-  <allow-intent href="https://*/*"/>
-  <allow-intent href="tel:*"/>
-  <allow-intent href="sms:*"/>
-  <allow-intent href="mailto:*"/>
-  <allow-intent href="geo:*"/>
-  <platform name="android">
-    <allow-intent href="market:*"/>
-  </platform>
-  <platform name="ios">
-    <allow-intent href="itms:*"/>
-    <allow-intent href="itms-apps:*"/>
-  </platform>
-  <preference name="webviewbounce" value="false"/>
-  <preference name="UIWebViewBounce" value="false"/>
-  <preference name="DisallowOverscroll" value="true"/>
-  <preference name="android-minSdkVersion" value="16"/>
-  <preference name="BackupWebStorage" value="none"/>
-  <preference name="SplashScreenDelay" value="2000"/>
-  <preference name="FadeSplashScreenDuration" value="2000"/>
-  <feature name="StatusBar">
-    <param name="ios-package" onload="true" value="CDVStatusBar"/>
-  </feature>
-
-  <feature name="SocialSharing">
-    <param name="ios-package" value="SocialSharing" />
-  </feature>
-
-  <feature name="SocialSharing">
-    <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
-  </feature>
-
+<?xml version='1.0' encoding='utf-8'?>
+<widget android-packageName="com.staymotivated.androidapp" id="com.staymotivated.app" ios-CFBundleIdentifier="com.staymotivated.iosapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>stay-motivated</name>
+    <description>Stay Motivated mobile app.</description>
+    <author email="ansarisam47@gmail.com" href="https://about.me/shamsher/">Stay Motivated Team</author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="SplashScreenDelay" value="2000" />
+    <preference name="FadeSplashScreenDuration" value="2000" />
+    <preference name="TwitterConsumerKey" value="c3zeUqDkE6gaSmRGGcbHXDYYO" />
+    <preference name="TwitterConsumerSecret" value="KPYFI8DbVjIlGMBaSEGAPL3aCtU7y90vOVQmLgla53uupFRrP4" />
+    <feature name="StatusBar">
+        <param name="ios-package" onload="true" value="CDVStatusBar" />
+    </feature>
+    <feature name="SocialSharing">
+        <param name="ios-package" value="SocialSharing" />
+    </feature>
+    <feature name="SocialSharing">
+        <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+    </feature>
+    <plugin name="twitter-connect-plugin" spec="~0.6.0">
+        <variable name="FABRIC_KEY" value="96b82775ccbea80cb4700cabf81258f656108ed1" />
+    </plugin>
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.5.0" />
+    <plugin name="cordova-plugin-facebook4" spec="~1.7.3">
+        <variable name="APP_ID" value="1095040833906556" />
+        <variable name="APP_NAME" value="stay-motivated" />
+    </plugin>
 </widget>
