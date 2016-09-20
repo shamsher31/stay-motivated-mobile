@@ -11,11 +11,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() { }
 
-  loginWithTwitter() {
+  signinWithTwitter() {
     this.loginService.Twitter();
   }
 
-  loginWithFacebook() {
+  signinWithFacebook() {
     this.loginService.Facebook();
   }
 
