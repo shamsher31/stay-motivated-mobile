@@ -1,27 +1,51 @@
 import { Injectable } from '@angular/core';
-import { TwitterConnect, Facebook } from 'ionic-native';
+import { GooglePlus, Facebook, TwitterConnect } from 'ionic-native';
+import { StorageService} from './storage.service';
 
 @Injectable()
 export class LoginService {
 
-  public Twitter() {
-    TwitterConnect.login().then(this.onSuccess, this.onError);
+  constructor(private storageService: StorageService) {}
+
+  public Google() {
+    return GooglePlus.login();
   }
 
   public Facebook() {
-    Facebook.login(['public_profile']).then(this.onSuccess, this.onError);
+    return Facebook.login(['public_profile']);
+  }
+
+  public Twitter() {
+    return TwitterConnect.login();
   }
 
   public Logout() {
-    TwitterConnect.logout().then(this.onSuccess, this.onError);
-    Facebook.logout().then(this.onSuccess, this.onError);
+    GooglePlus.logout().then((response) => {
+      this.onLogoutSuccess(response);
+    }, (err) => {
+      this.onLogoutError(err);
+    });
+
+    Facebook.logout().then((response) => {
+      this.onLogoutSuccess(response);
+    }, (err) => {
+      this.onLogoutError(err);
+    });
+
+    TwitterConnect.logout().then((response) => {
+      this.onLogoutSuccess(response);
+    }, (err) => {
+      this.onLogoutError(err);
+    });
   }
 
-  private onSuccess(response) {
-    alert(JSON.stringify(response));
+  private onLogoutSuccess(response) {
+    console.log(JSON.stringify(response));
+    this.storageService.clearData();
   }
 
-  private onError(err) {
-    alert(JSON.stringify(err));
+  private onLogoutError(err) {
+    console.log(JSON.stringify(err));
+    this.storageService.clearData();
   }
 }

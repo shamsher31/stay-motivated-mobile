@@ -14,6 +14,8 @@ export class TabsPage {
   private tab3Root: any;
   private tab4Root: any;
 
+  private isLoggedIn: boolean = false;
+
   constructor() {
     // this tells the tabs component which Pages
     // should be each tab's root Page
@@ -21,5 +23,10 @@ export class TabsPage {
     this.tab2Root = AboutPage;
     this.tab3Root = LoginComponent;
     this.tab4Root = ProfileComponent;
+  }
+
+  onLogin($event) {
+    console.log($event);
+    this.isLoggedIn = $event.isLoggedIn;
   }
 }

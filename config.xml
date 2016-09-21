@@ -44,4 +44,7 @@
         <variable name="APP_ID" value="1095040833906556" />
         <variable name="APP_NAME" value="stay-motivated" />
     </plugin>
+    <plugin name="cordova-plugin-googleplus" spec="~5.0.2">
+        <variable name="REVERSED_CLIENT_ID" value="AIzaSyAERQ7xRfH0qHMr_Ty0SxEDxcQeoUu_XZY" />
+    </plugin>
 </widget>
