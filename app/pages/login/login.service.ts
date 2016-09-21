@@ -12,6 +12,11 @@ export class LoginService {
     Facebook.login(['public_profile']).then(this.onSuccess, this.onError);
   }
 
+  public Logout() {
+    TwitterConnect.logout().then(this.onSuccess, this.onError);
+    Facebook.logout().then(this.onSuccess, this.onError);
+  }
+
   private onSuccess(response) {
     alert(JSON.stringify(response));
   }
