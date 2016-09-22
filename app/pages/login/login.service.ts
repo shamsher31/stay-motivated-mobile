@@ -29,33 +29,42 @@ export class LoginService {
       this.loginVia = parseInt(loginVia);
 
       if (this.loginVia == LoginConfig.GOOGLE) {
-        GooglePlus.logout().then((response) => {
-          this.onLogoutSuccess(response);
-        }, (err) => {
-          this.onLogoutError(err);
-        });
+        this.logoutGoogle();
       }
-
       if (this.loginVia == LoginConfig.FACEBOOK) {
-        Facebook.logout().then((response) => {
-          this.onLogoutSuccess(response);
-        }, (err) => {
-          this.onLogoutError(err);
-        });
+        this.logoutFacebook();
       }
-
       if (this.loginVia == LoginConfig.TWITTER) {
-        TwitterConnect.logout().then((response) => {
-          this.onLogoutSuccess(response);
-        }, (err) => {
-          this.onLogoutError(err);
-        });
+        this.logoutTwitter();
       }
 
     }).catch((err) => {
       this.onLogoutError(err);
     });
+  }
 
+  private logoutGoogle() {
+    GooglePlus.logout().then((response) => {
+      this.onLogoutSuccess(response);
+    }, (err) => {
+      this.onLogoutError(err);
+    });
+  }
+
+  private logoutFacebook() {
+    Facebook.logout().then((response) => {
+      this.onLogoutSuccess(response);
+    }, (err) => {
+      this.onLogoutError(err);
+    });
+  }
+
+  private logoutTwitter() {
+    TwitterConnect.logout().then((response) => {
+      this.onLogoutSuccess(response);
+    }, (err) => {
+      this.onLogoutError(err);
+    });
   }
 
   private onLogoutSuccess(response) {

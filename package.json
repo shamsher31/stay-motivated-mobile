@@ -39,7 +39,9 @@
     "cordova-plugin-inappbrowser",
     "cordova-plugin-x-socialsharing",
     "cordova-plugin-facebook4",
-    "twitter-connect-plugin"
+    "twitter-connect-plugin",
+    "cordova-plugin-googleplus",
+    "cordova-plugin-x-toast"
   ],
   "cordovaPlatforms": [],
   "name": "stay-motivated-mobile",
