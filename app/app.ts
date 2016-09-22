@@ -3,6 +3,7 @@ import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import {LoginConfig} from './shared/login-config';
+import {ToastService} from './shared/toast.service';
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>'
@@ -21,4 +22,4 @@ export class MyApp {
   }
 }
 
-ionicBootstrap(MyApp, [LoginConfig]);
+ionicBootstrap(MyApp, [LoginConfig, ToastService]);

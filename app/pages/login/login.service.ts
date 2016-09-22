@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { GooglePlus, Facebook, TwitterConnect } from 'ionic-native';
 import { StorageService} from './storage.service';
 import { LoginConfig } from '../../shared/login-config';
+import { ToastService } from '../../shared/toast.service';
 
 @Injectable()
 export class LoginService {
@@ -59,11 +60,13 @@ export class LoginService {
 
   private onLogoutSuccess(response) {
     console.log(JSON.stringify(response));
+    ToastService.showToast('Successfully Logout');
     this.storageService.clearAll();
   }
 
   private onLogoutError(err) {
     console.log(JSON.stringify(err));
+    ToastService.showToast();
     this.storageService.clearAll();
   }
 }
