@@ -6,7 +6,7 @@ import { LoginConfig } from '../../shared/login-config';
 @Injectable()
 export class LoginService {
 
-  private loginVia: number;
+  private loginVia: number = 0;
 
   constructor(private storageService: StorageService) {}
 
@@ -26,31 +26,34 @@ export class LoginService {
 
     this.storageService.getValue('loginVia').then((loginVia) => {
       this.loginVia = parseInt(loginVia);
+
+      if (this.loginVia == LoginConfig.GOOGLE) {
+        GooglePlus.logout().then((response) => {
+          this.onLogoutSuccess(response);
+        }, (err) => {
+          this.onLogoutError(err);
+        });
+      }
+
+      if (this.loginVia == LoginConfig.FACEBOOK) {
+        Facebook.logout().then((response) => {
+          this.onLogoutSuccess(response);
+        }, (err) => {
+          this.onLogoutError(err);
+        });
+      }
+
+      if (this.loginVia == LoginConfig.TWITTER) {
+        TwitterConnect.logout().then((response) => {
+          this.onLogoutSuccess(response);
+        }, (err) => {
+          this.onLogoutError(err);
+        });
+      }
+
+    }).catch((err) => {
+      this.onLogoutError(err);
     });
-
-    if (this.loginVia == LoginConfig.GOOGLE) {
-      GooglePlus.logout().then((response) => {
-        this.onLogoutSuccess(response);
-      }, (err) => {
-        this.onLogoutError(err);
-      });
-    }
-
-    if (this.loginVia == LoginConfig.FACEBOOK) {
-      Facebook.logout().then((response) => {
-        this.onLogoutSuccess(response);
-      }, (err) => {
-        this.onLogoutError(err);
-      });
-    }
-
-    if (this.loginVia == LoginConfig.TWITTER) {
-      TwitterConnect.logout().then((response) => {
-        this.onLogoutSuccess(response);
-      }, (err) => {
-        this.onLogoutError(err);
-      });
-    }
 
   }
 

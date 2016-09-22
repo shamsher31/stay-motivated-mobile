@@ -13,7 +13,7 @@ export class StorageService {
     this.storage.setJson(key, value);
   }
 
-  public getObject(key: string) :any {
+  public getObject(key: string) :Promise<any> {
     return this.storage.getJson(key);
   }
 
@@ -21,7 +21,7 @@ export class StorageService {
     this.storage.set(key, value); 
   }
 
-  public getValue(key: string) :any {
+  public getValue(key: string) :Promise<any> {
     return this.storage.get(key);
   }
 
