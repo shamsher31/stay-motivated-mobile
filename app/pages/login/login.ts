@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginService } from './login.service';
 import { StorageService} from './storage.service';
+import { LoginConfig } from '../../shared/login-config';
 
 @Component({
   templateUrl: 'build/pages/login/login.html',
@@ -15,11 +16,11 @@ export class LoginComponent {
   constructor(
     private navCtrl: NavController,
     private loginService: LoginService,
-    private storageService: StorageService) {}
+    private storageService: StorageService) { }
 
   signinWithGoogle() {
     this.loginService.Google().then((response) => {
-      this.onSuccess(response);
+      this.onSuccess(response, LoginConfig.GOOGLE);
     }, (err) => {
       this.onError(err);
     });
@@ -27,7 +28,7 @@ export class LoginComponent {
 
   signinWithFacebook() {
     this.loginService.Facebook().then((response) => {
-      this.onSuccess(response);
+      this.onSuccess(response, LoginConfig.FACEBOOK);
     }, (err) => {
       this.onError(err);
     });
@@ -35,22 +36,23 @@ export class LoginComponent {
 
   signinWithTwitter() {
     this.loginService.Twitter().then((response) => {
-      this.onSuccess(response);
+      this.onSuccess(response, LoginConfig.TWITTER);
     }, (err) => {
       this.onError(err);
     });
   }
 
-  private onSuccess(response) {
+  private onSuccess(response, loginVia) {
     console.log(response);
-    this.storageService.setData('profile', response);
+    this.storageService.setObject('profile', response);
+    this.storageService.setValue('loginVia', loginVia);
     this.isLoggedIn = true;
     this.onLogin.emit({isLoggedIn: this.isLoggedIn});
   }
 
   private onError(err) {
     console.log(err);
-    this.storageService.clearData();
+    this.storageService.clearAll();
     this.isLoggedIn = false;
     this.onLogin.emit({isLoggedIn: this.isLoggedIn});
   }

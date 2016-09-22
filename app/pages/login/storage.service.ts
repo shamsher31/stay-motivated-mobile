@@ -9,19 +9,27 @@ export class StorageService {
     this.storage = new Storage(SqlStorage);
   }
   
-  public setData(key: string, value: any) {
+  public setObject(key: string, value: any) {
+    this.storage.setJson(key, value);
+  }
+
+  public getObject(key: string) :any {
+    return this.storage.getJson(key);
+  }
+
+  public setValue(key: string, value: any) {
     this.storage.set(key, value); 
   }
-  
-  public getData(key: string) {
-    this.storage.get(key)
+
+  public getValue(key: string) :any {
+    return this.storage.get(key);
   }
-  
-  public removeData(key: string) {
+
+  public remove(key: string) {
     this.storage.remove(key);
   }
   
-  public clearData() {
+  public clearAll() {
     this.storage.clear(); 
   }
   
