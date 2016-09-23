@@ -2,83 +2,44 @@ import { Injectable } from '@angular/core';
 import { GooglePlus, Facebook, TwitterConnect } from 'ionic-native';
 import { StorageService} from '../../shared/storage.service';
 import { LoginConfig } from '../../shared/login-config';
-import { ToastService } from '../../shared/toast.service';
 
 @Injectable()
 export class LoginService {
 
   private loginVia: number;
 
-  constructor(
-    private storageService: StorageService,
-    private toastService: ToastService) {
+  constructor(private storageService: StorageService) {
       this.loginVia = 0;
     }
 
-  public Google() {
+  public loginGoogle() {
     return GooglePlus.login();
   }
 
-  public Facebook() {
+  public loginFacebook() {
     return Facebook.login(['public_profile']);
   }
 
-  public Twitter() {
+  public loginTwitter() {
     return TwitterConnect.login();
   }
 
-  public Logout() {
-    this.storageService.getValue('loginVia').then((loginVia) => {
+  public Logout() :Promise<any> {
+    return this.storageService.getValue('loginVia').then((loginVia) => {
       this.loginVia = parseInt(loginVia);
 
       if (this.loginVia == LoginConfig.GOOGLE) {
-        this.logoutGoogle();
+        return GooglePlus.logout();
       }
       if (this.loginVia == LoginConfig.FACEBOOK) {
-        this.logoutFacebook();
+        return Facebook.logout();
       }
       if (this.loginVia == LoginConfig.TWITTER) {
-        this.logoutTwitter();
+        return TwitterConnect.logout();
       }
 
     }).catch((err) => {
-      this.onLogoutError(err);
+      console.log(err);
     });
-  }
-
-  private logoutGoogle() {
-    GooglePlus.logout().then((response) => {
-      this.onLogoutSuccess(response);
-    }, (err) => {
-      this.onLogoutError(err);
-    });
-  }
-
-  private logoutFacebook() {
-    Facebook.logout().then((response) => {
-      this.onLogoutSuccess(response);
-    }, (err) => {
-      this.onLogoutError(err);
-    });
-  }
-
-  private logoutTwitter() {
-    TwitterConnect.logout().then((response) => {
-      this.onLogoutSuccess(response);
-    }, (err) => {
-      this.onLogoutError(err);
-    });
-  }
-
-  private onLogoutSuccess(response) {
-    console.log(JSON.stringify(response));
-    this.toastService.showToast('Successfully Logout');
-    this.storageService.clearAll();
-  }
-
-  private onLogoutError(err) {
-    console.log(JSON.stringify(err));
-    this.toastService.showToast();
-    this.storageService.clearAll();
   }
 }

@@ -19,7 +19,7 @@ export class LoginComponent {
     private storageService: StorageService) { }
 
   signinWithGoogle() {
-    this.loginService.Google().then((response) => {
+    this.loginService.loginGoogle().then((response) => {
       this.onSuccess(response, LoginConfig.GOOGLE);
     }, (err) => {
       this.onError(err);
@@ -27,7 +27,7 @@ export class LoginComponent {
   }
 
   signinWithFacebook() {
-    this.loginService.Facebook().then((response) => {
+    this.loginService.loginFacebook().then((response) => {
       this.onSuccess(response, LoginConfig.FACEBOOK);
     }, (err) => {
       this.onError(err);
@@ -35,7 +35,7 @@ export class LoginComponent {
   }
 
   signinWithTwitter() {
-    this.loginService.Twitter().then((response) => {
+    this.loginService.loginTwitter().then((response) => {
       this.onSuccess(response, LoginConfig.TWITTER);
     }, (err) => {
       this.onError(err);
