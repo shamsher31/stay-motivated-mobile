@@ -47,10 +47,4 @@
     <plugin name="cordova-plugin-googleplus" spec="~5.0.2">
         <variable name="REVERSED_CLIENT_ID" value="AIzaSyAERQ7xRfH0qHMr_Ty0SxEDxcQeoUu_XZY" />
     </plugin>
-    <feature name="Toast">
-      <param name="android-package" value="nl.xservices.plugins.Toast" />
-    </feature>
-    <feature name="Toast">
-      <param name="ios-package" value="Toast" />
-    </feature>
 </widget>

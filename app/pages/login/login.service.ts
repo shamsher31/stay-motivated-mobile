@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { GooglePlus, Facebook, TwitterConnect } from 'ionic-native';
-import { StorageService} from './storage.service';
+import { StorageService} from '../../shared/storage.service';
 import { LoginConfig } from '../../shared/login-config';
 import { ToastService } from '../../shared/toast.service';
 
 @Injectable()
 export class LoginService {
 
-  private loginVia: number = 0;
+  private loginVia: number;
 
-  constructor(private storageService: StorageService) {}
+  constructor(
+    private storageService: StorageService,
+    private toastService: ToastService) {
+      this.loginVia = 0;
+    }
 
   public Google() {
     return GooglePlus.login();
@@ -24,7 +28,6 @@ export class LoginService {
   }
 
   public Logout() {
-
     this.storageService.getValue('loginVia').then((loginVia) => {
       this.loginVia = parseInt(loginVia);
 
@@ -69,13 +72,13 @@ export class LoginService {
 
   private onLogoutSuccess(response) {
     console.log(JSON.stringify(response));
-    ToastService.showToast('Successfully Logout');
+    this.toastService.showToast('Successfully Logout');
     this.storageService.clearAll();
   }
 
   private onLogoutError(err) {
     console.log(JSON.stringify(err));
-    ToastService.showToast();
+    this.toastService.showToast();
     this.storageService.clearAll();
   }
 }

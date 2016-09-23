@@ -1,12 +1,12 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginService } from './login.service';
-import { StorageService} from './storage.service';
+import { StorageService } from '../../shared/storage.service';
 import { LoginConfig } from '../../shared/login-config';
 
 @Component({
   templateUrl: 'build/pages/login/login.html',
-  providers: [LoginService, StorageService]
+  providers: [LoginService]
 })
 export class LoginComponent {
 

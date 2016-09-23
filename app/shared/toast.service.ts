@@ -1,33 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Toast } from 'ionic-native';
+import { ToastController } from 'ionic-angular';
 
 @Injectable() 
 export class ToastService {
-  public static defaultMessage: string = "Something went wrong";
-  public static defaultDuration: string = '3000';
-  public static defaultPosition: string = 'bottom';
+
+  private defaultMessage: string;
+  private defaultDuration: number;
+  private defaultPosition: string;
+
+  constructor(private toastCtrl: ToastController) {
+    this.defaultMessage = "Something went wrong";
+    this.defaultDuration = 3000;
+    this.defaultPosition = 'bottom';
+  }
   
-  public static showToast(message?: string, duration?: string, position?: string ) {
+  public showToast(message?: string, duration?: number, position?: string ) {
 
     if (!message) {
-      message = ToastService.defaultMessage;
+      message = this.defaultMessage;
     }
     if (!duration) {
-      duration = ToastService.defaultDuration;
+      duration = this.defaultDuration;
     }
     if (!position) {
-      position = ToastService.defaultPosition;
+      position = this.defaultPosition;
     }
 
-    Toast.show(message, duration, position).subscribe(
-      toast => {
-        console.log(toast);
-      }
-    );
-  }
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: duration,
+      position: position
+    });
+    toast.present();
 
-  public static hideToast() {
-    Toast.hide();
   }
   
 }
