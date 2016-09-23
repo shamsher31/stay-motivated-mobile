@@ -14,7 +14,7 @@ export class TabsPage {
   private tab3Root: any;
   private tab4Root: any;
 
-  private isLoggedIn: boolean = false;
+  private isLoggedIn: boolean;
 
   constructor() {
     // this tells the tabs component which Pages
@@ -23,9 +23,16 @@ export class TabsPage {
     this.tab2Root = AboutPage;
     this.tab3Root = LoginComponent;
     this.tab4Root = ProfileComponent;
+
+    this.isLoggedIn = false;
   }
 
   onLogin($event) {
+    console.log($event);
+    this.isLoggedIn = $event.isLoggedIn;
+  }
+
+  onLogout($event) {
     console.log($event);
     this.isLoggedIn = $event.isLoggedIn;
   }

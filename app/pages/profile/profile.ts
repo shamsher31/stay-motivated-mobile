@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginService } from '../login/login.service';
 import { ToastService } from '../../shared/toast.service';
@@ -10,6 +10,10 @@ import { StorageService} from '../../shared/storage.service';
 })
 
 export class ProfileComponent {
+
+  private isLoggedIn: boolean;
+  @Output() onLogout = new EventEmitter();
+
   constructor(
     private navCtrl: NavController,
     private loginService: LoginService,
@@ -24,22 +28,28 @@ export class ProfileComponent {
     });
   }
 
-  private goToHomePage() {
-    // set HomePage as active tab
-    this.navCtrl.parent.select(0);
-  }
-
   private onLogoutSuccess(response) {
     console.log(JSON.stringify(response));
     this.toastService.showToast('Successfully Logout');
-    this.storageService.clearAll();
-    this.goToHomePage();
+    this.afterLogout();
   }
 
   private onLogoutError(err) {
     console.log(JSON.stringify(err));
     this.toastService.showToast();
+    this.afterLogout();
+  }
+
+  private afterLogout() {
     this.storageService.clearAll();
+    this.isLoggedIn = false;
+    this.onLogout.emit({isLoggedIn: this.isLoggedIn});
     this.goToHomePage();
   }
+
+  private goToHomePage() {
+    // set HomePage as active tab
+    this.navCtrl.parent.select(0);
+  }
+
 }

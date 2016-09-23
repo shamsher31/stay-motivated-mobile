@@ -8,15 +8,18 @@ import { LoginConfig } from '../../shared/login-config';
   templateUrl: 'build/pages/login/login.html',
   providers: [LoginService]
 })
+
 export class LoginComponent {
 
-  public isLoggedIn: boolean = false;
-  @Output() onLogin = new EventEmitter;
+  private isLoggedIn: boolean;
+  @Output() onLogin: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private navCtrl: NavController,
     private loginService: LoginService,
-    private storageService: StorageService) { }
+    private storageService: StorageService) {
+      this.isLoggedIn = false;
+    }
 
   signinWithGoogle() {
     this.loginService.loginGoogle().then((response) => {
