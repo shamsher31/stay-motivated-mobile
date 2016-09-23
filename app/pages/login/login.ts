@@ -1,8 +1,9 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginService } from './login.service';
 import { StorageService } from '../../shared/storage.service';
 import { LoginConfig } from '../../shared/login-config';
+import { BroadcasteService } from '../../shared/broadcast.service';
 
 @Component({
   templateUrl: 'build/pages/login/login.html',
@@ -12,12 +13,12 @@ import { LoginConfig } from '../../shared/login-config';
 export class LoginComponent {
 
   private isLoggedIn: boolean;
-  @Output() onLogin: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private navCtrl: NavController,
     private loginService: LoginService,
-    private storageService: StorageService) {
+    private storageService: StorageService,
+    private broadcaster: BroadcasteService) {
       this.isLoggedIn = false;
     }
 
@@ -50,14 +51,14 @@ export class LoginComponent {
     this.storageService.setObject('profile', response);
     this.storageService.setValue('loginVia', loginVia);
     this.isLoggedIn = true;
-    this.onLogin.emit({isLoggedIn: this.isLoggedIn});
+    this.broadcaster.broadcast('onLogin', this.isLoggedIn);
   }
 
   private onError(err) {
     console.log(err);
     this.storageService.clearAll();
     this.isLoggedIn = false;
-    this.onLogin.emit({isLoggedIn: this.isLoggedIn});
+    this.broadcaster.broadcast('onLogin', this.isLoggedIn);
   }
 
 }

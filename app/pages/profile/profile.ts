@@ -1,8 +1,9 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginService } from '../login/login.service';
 import { ToastService } from '../../shared/toast.service';
 import { StorageService} from '../../shared/storage.service';
+import { BroadcasteService } from '../../shared/broadcast.service';
 
 @Component({
   templateUrl: 'build/pages/profile/profile.html',
@@ -12,13 +13,13 @@ import { StorageService} from '../../shared/storage.service';
 export class ProfileComponent {
 
   private isLoggedIn: boolean;
-  @Output() onLogout = new EventEmitter();
 
   constructor(
     private navCtrl: NavController,
     private loginService: LoginService,
     private toastService: ToastService,
-    private storageService: StorageService) {}
+    private storageService: StorageService,
+    private broadcaster: BroadcasteService) {}
 
   logout() {
     this.loginService.Logout().then((response) => {
@@ -43,7 +44,7 @@ export class ProfileComponent {
   private afterLogout() {
     this.storageService.clearAll();
     this.isLoggedIn = false;
-    this.onLogout.emit({isLoggedIn: this.isLoggedIn});
+    this.broadcaster.broadcast('onLogout', this.isLoggedIn);
     this.goToHomePage();
   }
 

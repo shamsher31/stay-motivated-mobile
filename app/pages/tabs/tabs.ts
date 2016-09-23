@@ -3,6 +3,7 @@ import {HomePage} from '../home/home';
 import {AboutPage} from '../about/about';
 import {LoginComponent} from '../login/login';
 import {ProfileComponent} from '../profile/profile';
+import { BroadcasteService } from '../../shared/broadcast.service';
 
 @Component({
   templateUrl: 'build/pages/tabs/tabs.html'
@@ -16,7 +17,7 @@ export class TabsPage {
 
   private isLoggedIn: boolean;
 
-  constructor() {
+  constructor(private broadcaster: BroadcasteService) {
     // this tells the tabs component which Pages
     // should be each tab's root Page
     this.tab1Root = HomePage;
@@ -25,15 +26,25 @@ export class TabsPage {
     this.tab4Root = ProfileComponent;
 
     this.isLoggedIn = false;
+
+    this.broadcaster.on<string>('onLogin')
+      .subscribe(isLoggedIn => {
+        this.onLogin(isLoggedIn);
+      });
+
+    this.broadcaster.on<string>('onLogout')
+      .subscribe(isLoggedIn => {
+        this.onLogout(isLoggedIn);
+      });
   }
 
-  onLogin($event) {
-    console.log($event);
-    this.isLoggedIn = $event.isLoggedIn;
+  onLogin(isLoggedIn) {
+    console.log(isLoggedIn);
+    this.isLoggedIn = isLoggedIn;
   }
 
-  onLogout($event) {
-    console.log($event);
-    this.isLoggedIn = $event.isLoggedIn;
+  onLogout(isLoggedIn) {
+    console.log(isLoggedIn);
+    this.isLoggedIn = isLoggedIn;
   }
 }

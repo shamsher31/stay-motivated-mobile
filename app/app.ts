@@ -5,6 +5,7 @@ import {TabsPage} from './pages/tabs/tabs';
 import {LoginConfig} from './shared/login-config';
 import {StorageService} from './shared/storage.service';
 import {ToastService} from './shared/toast.service';
+import { BroadcasteService } from './shared/broadcast.service';
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>'
@@ -26,5 +27,6 @@ export class MyApp {
 ionicBootstrap(MyApp, [
   LoginConfig,
   StorageService,
-  ToastService
+  ToastService,
+  BroadcasteService
 ]);
