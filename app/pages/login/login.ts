@@ -3,7 +3,8 @@ import { NavController } from 'ionic-angular';
 import { LoginService } from './login.service';
 import { StorageService } from '../../shared/storage.service';
 import { LoginConfig } from '../../shared/login-config';
-import { BroadcasteService } from '../../shared/broadcast.service';
+import { BroadcastService } from '../../shared/broadcast.service';
+import { ProfileComponent } from '../profile/profile';
 
 @Component({
   templateUrl: 'build/pages/login/login.html',
@@ -18,7 +19,7 @@ export class LoginComponent {
     private navCtrl: NavController,
     private loginService: LoginService,
     private storageService: StorageService,
-    private broadcaster: BroadcasteService) {
+    private broadcaster: BroadcastService) {
       this.isLoggedIn = false;
     }
 
@@ -52,6 +53,7 @@ export class LoginComponent {
     this.storageService.setValue('loginVia', loginVia);
     this.isLoggedIn = true;
     this.broadcaster.broadcast('onLogin', this.isLoggedIn);
+    this.navCtrl.push(ProfileComponent);
   }
 
   private onError(err) {

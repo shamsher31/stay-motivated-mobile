@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { LoginService } from '../login/login.service';
 import { ToastService } from '../../shared/toast.service';
 import { StorageService} from '../../shared/storage.service';
-import { BroadcasteService } from '../../shared/broadcast.service';
+import { BroadcastService } from '../../shared/broadcast.service';
 
 @Component({
   templateUrl: 'build/pages/profile/profile.html',
@@ -19,7 +19,7 @@ export class ProfileComponent {
     private loginService: LoginService,
     private toastService: ToastService,
     private storageService: StorageService,
-    private broadcaster: BroadcasteService) {}
+    private broadcaster: BroadcastService) {}
 
   logout() {
     this.loginService.Logout().then((response) => {

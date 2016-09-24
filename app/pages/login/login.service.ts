@@ -9,8 +9,8 @@ export class LoginService {
   private loginVia: number;
 
   constructor(private storageService: StorageService) {
-      this.loginVia = 0;
-    }
+    this.loginVia = 0;
+  }
 
   public loginGoogle() {
     return GooglePlus.login();

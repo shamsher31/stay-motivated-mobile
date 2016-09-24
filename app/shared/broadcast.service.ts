@@ -8,7 +8,7 @@ interface BroadcastEvent {
   data?: any;
 }
 
-export class BroadcasteService {
+export class BroadcastService {
   private _eventBus: Subject<BroadcastEvent>;
 
   constructor() {
@@ -19,7 +19,7 @@ export class BroadcasteService {
     this._eventBus.next({key, data});
   }
 
-  on<T>(key: any): Observable<T> {
+  on<T>(key: T): Observable<T> {
     return this._eventBus.asObservable()
       .filter(event => event.key === key)
       .map(event => <T>event.data);
