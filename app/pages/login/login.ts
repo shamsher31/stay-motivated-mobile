@@ -47,19 +47,26 @@ export class LoginComponent {
     });
   }
 
-  private onSuccess(response, loginVia) {
+  private onSuccess(response: any, loginVia: number) {
     console.log(response);
-    this.storageService.setObject('profile', response);
-    this.storageService.setValue('loginVia', loginVia);
-    this.isLoggedIn = true;
-    this.broadcaster.broadcast('onLogin', this.isLoggedIn);
+    this.storeLoginResponse(response, loginVia);
+    this.broadcastOnLogin(true);
     this.navCtrl.push(ProfileComponent);
   }
 
   private onError(err) {
     console.log(err);
     this.storageService.clearAll();
-    this.isLoggedIn = false;
+    this.broadcastOnLogin(false);
+  }
+
+  private storeLoginResponse(res: any, loginVia: number) {
+    this.storageService.setObject('profile', res);
+    this.storageService.setValue('loginVia', loginVia);
+  }
+
+  private broadcastOnLogin(val: boolean) {
+    this.isLoggedIn = val;
     this.broadcaster.broadcast('onLogin', this.isLoggedIn);
   }
 
