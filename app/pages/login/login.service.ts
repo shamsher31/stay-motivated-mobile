@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GooglePlus, Facebook, TwitterConnect } from 'ionic-native';
 import { StorageService} from '../../shared/storage.service';
+import { LogService} from '../../shared/log.service';
 import { LoginConfig } from '../../shared/login-config';
 
 @Injectable()
@@ -39,7 +40,7 @@ export class LoginService {
       }
 
     }).catch((err) => {
-      console.log(err);
+      LogService.log(err);
     });
   }
 }

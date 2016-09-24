@@ -1,11 +1,12 @@
-import {Component} from '@angular/core';
+import {Component, enableProdMode} from '@angular/core';
 import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import {LoginConfig} from './shared/login-config';
 import {StorageService} from './shared/storage.service';
 import {ToastService} from './shared/toast.service';
-import { BroadcastService } from './shared/broadcast.service';
+import {BroadcastService} from './shared/broadcast.service';
+import {LogService} from './shared/log.service';
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>'
@@ -24,7 +25,11 @@ export class MyApp {
   }
 }
 
+// remove comment to enable production mode
+//enableProdMode();
+
 ionicBootstrap(MyApp, [
+  LogService,
   LoginConfig,
   StorageService,
   ToastService,

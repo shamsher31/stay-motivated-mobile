@@ -4,6 +4,7 @@ import { LoginService } from './login.service';
 import { StorageService } from '../../shared/storage.service';
 import { LoginConfig } from '../../shared/login-config';
 import { BroadcastService } from '../../shared/broadcast.service';
+import { LogService } from '../../shared/log.service';
 import { ProfileComponent } from '../profile/profile';
 
 @Component({
@@ -48,14 +49,14 @@ export class LoginComponent {
   }
 
   private onSuccess(response: any, loginVia: number) {
-    console.log(response);
+    LogService.log(response);
     this.storeLoginResponse(response, loginVia);
     this.broadcastOnLogin(true);
     this.navCtrl.push(ProfileComponent);
   }
 
   private onError(err) {
-    console.log(err);
+    LogService.log(err);
     this.storageService.clearAll();
     this.broadcastOnLogin(false);
   }

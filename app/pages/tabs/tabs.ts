@@ -4,6 +4,7 @@ import {AboutPage} from '../about/about';
 import {LoginComponent} from '../login/login';
 import {ProfileComponent} from '../profile/profile';
 import { BroadcastService } from '../../shared/broadcast.service';
+import { LogService } from '../../shared/log.service';
 
 @Component({
   templateUrl: 'build/pages/tabs/tabs.html'
@@ -39,12 +40,12 @@ export class TabsPage {
   }
 
   private onLogin(isLoggedIn) {
-    console.log(isLoggedIn);
+    LogService.log(isLoggedIn);
     this.isLoggedIn = isLoggedIn;
   }
 
   private onLogout(isLoggedIn) {
-    console.log(isLoggedIn);
+    LogService.log(isLoggedIn);
     this.isLoggedIn = isLoggedIn;
   }
 }

@@ -4,6 +4,7 @@ import { LoginService } from '../login/login.service';
 import { ToastService } from '../../shared/toast.service';
 import { StorageService} from '../../shared/storage.service';
 import { BroadcastService } from '../../shared/broadcast.service';
+import { LogService } from '../../shared/log.service';
 
 @Component({
   templateUrl: 'build/pages/profile/profile.html',
@@ -30,13 +31,13 @@ export class ProfileComponent {
   }
 
   private onLogoutSuccess(response) {
-    console.log(JSON.stringify(response));
+    LogService.log(JSON.stringify(response));
     this.toastService.showToast('Successfully Logout');
     this.afterLogout();
   }
 
   private onLogoutError(err) {
-    console.log(JSON.stringify(err));
+    LogService.log(JSON.stringify(err));
     this.toastService.showToast();
     this.afterLogout();
   }
