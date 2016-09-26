@@ -7,7 +7,9 @@ export class LogService {
 
   public static log(...args: any[]): void {
     if (!LogService.isProduction) {
-      console.log(args);
+      for (let arg of args) {
+        console.log(arg);
+      }
     }
   }
 }
