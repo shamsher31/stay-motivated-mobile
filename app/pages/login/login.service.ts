@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GooglePlus, Facebook, TwitterConnect } from 'ionic-native';
 import { StorageService} from '../../shared/storage.service';
 import { LogService} from '../../shared/log.service';
-import { LoginConfig } from '../../shared/login-config';
+import { oAuthConfig } from '../../shared/oauth-config';
 
 @Injectable()
 export class LoginService {
@@ -29,13 +29,13 @@ export class LoginService {
     return this.storageService.getValue('loginVia').then((loginVia) => {
       this.loginVia = parseInt(loginVia);
 
-      if (this.loginVia == LoginConfig.GOOGLE) {
+      if (this.loginVia == oAuthConfig.Google) {
         return GooglePlus.logout();
       }
-      if (this.loginVia == LoginConfig.FACEBOOK) {
+      if (this.loginVia == oAuthConfig.Facebook) {
         return Facebook.logout();
       }
-      if (this.loginVia == LoginConfig.TWITTER) {
+      if (this.loginVia == oAuthConfig.Twitter) {
         return TwitterConnect.logout();
       }
 

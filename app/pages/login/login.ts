@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginService } from './login.service';
 import { StorageService } from '../../shared/storage.service';
-import { LoginConfig } from '../../shared/login-config';
+import { oAuthConfig } from '../../shared/oauth-config';
 import { BroadcastService } from '../../shared/broadcast.service';
 import { LogService } from '../../shared/log.service';
 import { ProfileComponent } from '../profile/profile';
@@ -26,7 +26,7 @@ export class LoginComponent {
 
   signinWithGoogle() {
     this.loginService.loginGoogle().then((response) => {
-      this.onSuccess(response, LoginConfig.GOOGLE);
+      this.onSuccess(response, oAuthConfig.Google);
     }, (err) => {
       this.onError(err);
     });
@@ -34,7 +34,7 @@ export class LoginComponent {
 
   signinWithFacebook() {
     this.loginService.loginFacebook().then((response) => {
-      this.onSuccess(response, LoginConfig.FACEBOOK);
+      this.onSuccess(response, oAuthConfig.Facebook);
     }, (err) => {
       this.onError(err);
     });
@@ -42,7 +42,7 @@ export class LoginComponent {
 
   signinWithTwitter() {
     this.loginService.loginTwitter().then((response) => {
-      this.onSuccess(response, LoginConfig.TWITTER);
+      this.onSuccess(response, oAuthConfig.Twitter);
     }, (err) => {
       this.onError(err);
     });
