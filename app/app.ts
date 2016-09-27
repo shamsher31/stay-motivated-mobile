@@ -2,7 +2,6 @@ import {Component, enableProdMode} from '@angular/core';
 import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
-import {oAuthConfig} from './shared/oauth-config';
 import {StorageService} from './shared/storage.service';
 import {ToastService} from './shared/toast.service';
 import {BroadcastService} from './shared/broadcast.service';
@@ -30,7 +29,6 @@ export class MyApp {
 
 ionicBootstrap(MyApp, [
   LogService,
-  oAuthConfig,
   StorageService,
   ToastService,
   BroadcastService
