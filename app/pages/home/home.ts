@@ -3,8 +3,8 @@ import {NavController} from 'ionic-angular';
 import { SocialSharing } from 'ionic-native';
 import * as _ from 'lodash';
 
-import { Qoute } from './qoute';
-import { QouteService } from './qoute.service';
+import { Qoute } from '../qoute/qoute';
+import { QouteService } from '../qoute/qoute.service';
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
