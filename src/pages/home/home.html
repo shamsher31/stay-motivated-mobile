@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Stay Motivated</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-refresher (ionRefresh)="refreshQoutes($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-searchbar
+    (ionInput)="getItems($event)"
+    (ionClear)="getQoutes()">
+  </ion-searchbar>
+  <ion-card class="card-top" *ngFor="let qoute of qoutes; trackBy:trackByQoutesId">
+    <ion-card-content >
+       {{ qoute.title }}
+       <i> <b>-- {{ qoute.author }} </b></i>
+    </ion-card-content>
+    <ion-row no-padding class="removeMargin">
+      <ion-col text-right>
+        <button clear small (click)="openSharingOptions(qoute)">
+          <ion-icon name='share'></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

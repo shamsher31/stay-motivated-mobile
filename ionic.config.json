@@ -1,6 +1,6 @@
 {
-  "name": "stay-motivated-v1",
+  "name": "stay-motivated-mobile",
+  "app_id": "",
   "v2": true,
-  "typescript": true,
-  "app_id": "ab77ceb0"
+  "typescript": true
 }

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="vertical-align-content">
+  <ion-grid>
+    <ion-row no-padding>
+      <ion-col text-center>
+        <button ion-button round class="loginButtonWidth" (click)="signinWithGoogle()">
+          <ion-icon name="logo-google"></ion-icon>
+          Signin with Google
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding>
+      <ion-col text-center>
+        <button ion-button round class="loginButtonWidth" (click)="signinWithFacebook()">
+          <ion-icon name="logo-facebook"></ion-icon>
+          Signin with Facebook
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding>
+      <ion-col text-center>
+        <button ion-button round class="loginButtonWidth" (click)="signinWithTwitter()">
+          <ion-icon name="logo-twitter"></ion-icon>
+          Signin with Twitter
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding>
+      <ion-col text-center>
+        <button ion-button round class="loginButtonWidth">
+          <ion-icon name="logo-github"></ion-icon>
+          Signin with Github
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
