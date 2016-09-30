@@ -3,6 +3,7 @@ import {NavController} from 'ionic-angular';
 import { SocialSharing } from 'ionic-native';
 import { QouteService } from '../qoute/qoute.service';
 import { Qoute } from '../qoute/qoute';
+import _ from 'lodash';
 
 @Component({
   templateUrl: 'home.html'
@@ -16,7 +17,7 @@ export class HomePage implements OnInit {
     public qouteService: QouteService) {}
 
   getQoutes() {
-    this.qouteService.getQoutes().then(qoutes => this.qoutes = qoutes);
+    this.qouteService.getQoutes().then(qoutes => this.qoutes = _.shuffle(qoutes));
   }
 
   ngOnInit() {
