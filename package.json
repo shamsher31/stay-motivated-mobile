@@ -20,7 +20,7 @@
     "ionicons": "^3.0.0"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "^0.0.23",
+    "@ionic/app-scripts": "0.0.27",
     "@types/lodash": "4.14.36",
     "typescript": "^2.0.3"
   },
