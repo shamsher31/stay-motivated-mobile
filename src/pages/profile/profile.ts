@@ -5,12 +5,13 @@ import { StorageService} from '../../shared/storage.service';
 import { BroadcastService } from '../../shared/broadcast.service';
 import { LogService } from '../../shared/log.service';
 import { LoginService } from '../login/login.service';
+import { HomePage } from '../home/home';
 
 @Component({
   templateUrl: 'profile.html'
 })
 
-export class ProfileComponent {
+export class ProfilePage {
 
   isLoggedIn: boolean;
 
@@ -45,12 +46,7 @@ export class ProfileComponent {
     this.storageService.clearAll();
     this.isLoggedIn = false;
     this.broadcaster.broadcast('onLogout', this.isLoggedIn);
-    this.goToHomePage();
-  }
-
-  goToHomePage() {
-    // set HomePage as active tab
-    this.navCtrl.parent.select(0);
+    this.navCtrl.setRoot(HomePage);
   }
 
 }

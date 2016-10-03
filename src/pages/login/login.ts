@@ -4,14 +4,14 @@ import { StorageService } from '../../shared/storage.service';
 import { oAuthConfig } from '../../shared/oauth-config';
 import { BroadcastService } from '../../shared/broadcast.service';
 import { LogService } from '../../shared/log.service';
-import { ProfileComponent } from '../profile/profile';
+import { ProfilePage } from '../profile/profile';
 import { LoginService} from './login.service';
 
 @Component({
   templateUrl: 'login.html'
 })
 
-export class LoginComponent {
+export class LoginPage {
 
   isLoggedIn: boolean;
 
@@ -51,7 +51,7 @@ export class LoginComponent {
     LogService.log(response);
     this.storeLoginResponse(response, loginVia);
     this.broadcastOnLogin(true);
-    this.navCtrl.push(ProfileComponent);
+    this.navCtrl.push(ProfilePage);
   }
 
   onError(err) {

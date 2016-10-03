@@ -1,21 +1,41 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
-import { TabsPage } from '../pages/tabs/tabs';
-
+import { HomePage } from '../pages/home/home';
+import { AboutPage } from '../pages/about/about';
+import { LoginPage } from '../pages/login/login';
+import { ProfilePage } from '../pages/profile/profile';
 
 @Component({
-  template: `<ion-nav [root]="rootPage"></ion-nav>`
+  templateUrl: `app.html`
 })
 export class MyApp {
-  rootPage = TabsPage;
+  @ViewChild(Nav) nav: Nav;
 
-  constructor(platform: Platform) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+  rootPage: any = HomePage;
+
+  pages: Array<{title: string, component: any, icon: string}>;
+
+  constructor(public platform: Platform) {
+    this.initializeApp();
+
+    this.pages = [
+      { title: 'Home', component: HomePage, icon: 'home' },
+      { title: 'Login', component: LoginPage, icon: 'log-in' },
+      { title: 'Profile', component: ProfilePage, icon: 'person' },
+      { title: 'About', component: AboutPage, icon: 'information-circle' }
+    ];
+
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
       StatusBar.styleDefault();
     });
+  }
+
+  openPage(page) {
+    this.nav.setRoot(page.component);
   }
 }
