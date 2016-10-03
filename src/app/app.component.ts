@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
-
+import _ from 'lodash';
 import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { LoginPage } from '../pages/login/login';
@@ -24,16 +24,14 @@ export class MyApp {
     public platform: Platform,
     public broadcaster: BroadcastService) {
 
+    this.isLoggedIn = false;
     this.initializeApp();
 
     this.pages = [
       { title: 'Home', component: HomePage, icon: 'home' },
-      { title: 'Login', component: LoginPage, icon: 'log-in' },
-      { title: 'Profile', component: ProfilePage, icon: 'person' },
-      { title: 'About', component: AboutPage, icon: 'information-circle' }
+      { title: 'About', component: AboutPage, icon: 'information-circle' },
+      { title: 'Login', component: LoginPage, icon: 'log-in' }
     ];
-
-    this.isLoggedIn = false;
 
     this.broadcaster.on<string>('onLogin')
       .subscribe(isLoggedIn => {
@@ -60,10 +58,26 @@ export class MyApp {
   onLogin(isLoggedIn) {
     LogService.log(isLoggedIn);
     this.isLoggedIn = isLoggedIn;
+    this.handleMenuItem(this.isLoggedIn);
   }
 
   onLogout(isLoggedIn) {
     LogService.log(isLoggedIn);
     this.isLoggedIn = isLoggedIn;
+    this.handleMenuItem(this.isLoggedIn);
+  }
+
+  handleMenuItem(isLoggedIn: boolean) {
+    if (isLoggedIn == false) {
+      this.pages = _.pullAllBy(this.pages, [{ title : 'Profile'}], 'title');
+      this.pages.push({ title: 'Login', component: LoginPage, icon: 'log-in' })
+      this.nav.setRoot(HomePage);
+    }
+
+    if (isLoggedIn == true) {
+      this.pages = _.pullAllBy(this.pages, [{ title : 'Login'}], 'title');
+      this.pages.push({ title: 'Profile', component: ProfilePage, icon: 'person' });
+      this.nav.setRoot(ProfilePage);
+    }
   }
 }

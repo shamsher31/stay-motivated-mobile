@@ -5,7 +5,6 @@ import { StorageService} from '../../shared/storage.service';
 import { BroadcastService } from '../../shared/broadcast.service';
 import { LogService } from '../../shared/log.service';
 import { LoginService } from '../login/login.service';
-import { HomePage } from '../home/home';
 
 @Component({
   templateUrl: 'profile.html'
@@ -46,7 +45,6 @@ export class ProfilePage {
     this.storageService.clearAll();
     this.isLoggedIn = false;
     this.broadcaster.broadcast('onLogout', this.isLoggedIn);
-    this.navCtrl.setRoot(HomePage);
   }
 
 }
