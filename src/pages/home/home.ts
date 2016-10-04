@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import { SocialSharing } from 'ionic-native';
+import { SocialShareService } from '../../shared/social-share.service';
 import { QouteService } from '../qoute/qoute.service';
 import { Qoute } from '../qoute/qoute';
 import _ from 'lodash';
@@ -14,7 +15,8 @@ export class HomePage implements OnInit {
 
   constructor(
     public navCtrl: NavController, 
-    public qouteService: QouteService) {}
+    public qouteService: QouteService,
+    public socialShareService: SocialShareService) {}
 
   getQoutes() {
     this.qouteService.getQoutes().then(qoutes => this.qoutes = _.shuffle(qoutes));
@@ -51,11 +53,7 @@ export class HomePage implements OnInit {
     return qoute.id;
   }
 
-  openSharingOptions(qoute) {
-    SocialSharing.share(qoute.title +' - '+ qoute.author, null, null, null).then(() => {
-      // Success
-    }).catch(() => {
-      // Error!
-    });
+  openSharingOptions(qoute: Qoute) {
+    this.socialShareService.shareQoute(qoute);
   }
 }

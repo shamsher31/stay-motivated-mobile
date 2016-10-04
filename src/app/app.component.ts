@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 
 import { BroadcastService } from '../shared/broadcast.service';
+import { SocialShareService } from '../shared/social-share.service';
 import { LogService } from '../shared/log.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class MyApp {
 
   constructor(
     public platform: Platform,
-    public broadcaster: BroadcastService) {
+    public broadcaster: BroadcastService,
+    public socialShareService: SocialShareService) {
 
     this.isLoggedIn = false;
     this.initializeApp();
@@ -53,6 +55,10 @@ export class MyApp {
 
   openPage(page) {
     this.nav.setRoot(page.component);
+  }
+
+  shareWithFriends() {
+    this.socialShareService.inviteFriends();
   }
 
   onLogin(isLoggedIn) {

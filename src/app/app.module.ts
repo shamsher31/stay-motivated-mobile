@@ -11,6 +11,7 @@ import { StorageService } from '../shared/storage.service';
 import { BroadcastService } from '../shared/broadcast.service';
 import { LogService } from '../shared/log.service';
 import { ToastService } from '../shared/toast.service';
+import { SocialShareService } from '../shared/social-share.service';
 import { LoginService} from '../pages/login/login.service';
 import { QouteService} from '../pages/qoute/qoute.service';
 
@@ -39,7 +40,8 @@ import { QouteService} from '../pages/qoute/qoute.service';
     LogService,
     LoginService,
     QouteService,
-    ToastService
+    ToastService,
+    SocialShareService
   ]
 })
 export class AppModule {}
