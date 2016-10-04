@@ -34,9 +34,7 @@
     "cordova-plugin-inappbrowser",
     "cordova-plugin-x-socialsharing",
     "cordova-plugin-facebook4",
-    "twitter-connect-plugin",
-    "cordova-plugin-googleplus",
-    "cordova-plugin-x-toast"
+    "twitter-connect-plugin"
   ],
   "cordovaPlatforms": []
 }
