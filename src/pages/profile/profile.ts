@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { ToastService } from '../../shared/toast.service';
 import { StorageService} from '../../shared/storage.service';
 import { BroadcastService } from '../../shared/broadcast.service';
@@ -19,14 +19,34 @@ export class ProfilePage {
     public loginService: LoginService,
     public toastService: ToastService,
     public storageService: StorageService,
-    public broadcaster: BroadcastService) {}
+    public broadcaster: BroadcastService,
+    public alertCtrl: AlertController) {}
 
   logout() {
-    this.loginService.Logout().then((response) => {
-      this.onLogoutSuccess(response);
-    }, (err) => {
-      this.onLogoutError(err);
+    let confirm = this.alertCtrl.create({
+      title: 'Logout',
+      message: 'Are you sure you want to Logout?',
+      buttons: [
+        {
+          text: 'Stay in',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Logout',
+          handler: () => {
+            console.log('Agree clicked');
+            this.loginService.Logout().then((response) => {
+              this.onLogoutSuccess(response);
+            }, (err) => {
+              this.onLogoutError(err);
+            });
+          }
+        }
+      ]
     });
+    confirm.present();
   }
 
   onLogoutSuccess(response) {
