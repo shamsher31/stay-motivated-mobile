@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, enableProdMode } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
@@ -12,8 +12,12 @@ import { BroadcastService } from '../shared/broadcast.service';
 import { LogService } from '../shared/log.service';
 import { ToastService } from '../shared/toast.service';
 import { SocialShareService } from '../shared/social-share.service';
+import { LoadingService } from '../shared/loading.service';
 import { LoginService} from '../pages/login/login.service';
 import { QouteService} from '../pages/qoute/qoute.service';
+
+// remove comment to enable production mode
+enableProdMode();
 
 @NgModule({
   declarations: [
@@ -41,7 +45,8 @@ import { QouteService} from '../pages/qoute/qoute.service';
     LoginService,
     QouteService,
     ToastService,
-    SocialShareService
+    SocialShareService,
+    LoadingService
   ]
 })
 export class AppModule {}

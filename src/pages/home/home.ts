@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy } from '@angular/core';
 import {NavController} from 'ionic-angular';
-import { SocialSharing } from 'ionic-native';
 import { SocialShareService } from '../../shared/social-share.service';
+import { LoadingService } from '../../shared/loading.service';
 import { QouteService } from '../qoute/qoute.service';
 import { Qoute } from '../qoute/qoute';
 import _ from 'lodash';
@@ -9,23 +9,30 @@ import _ from 'lodash';
 @Component({
   templateUrl: 'home.html'
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
 
   qoutes: Qoute[];
+  public timer: any;
 
   constructor(
     public navCtrl: NavController, 
     public qouteService: QouteService,
-    public socialShareService: SocialShareService) {}
-
-  getQoutes() {
-    this.qouteService.getQoutes().then(qoutes => this.qoutes = _.shuffle(qoutes));
-  }
+    public socialShareService: SocialShareService,
+    public loadingService: LoadingService) {}
 
   ngOnInit() {
     this.getQoutes();
   }
-  
+
+  getQoutes() {
+    this.loadingService.showSearchLoader();
+    this.qouteService.getQoutes()
+        .then(qoutes => {
+          this.qoutes = _.shuffle(qoutes);
+          this.loadingService.hideSearchLoader();
+        });
+  }
+
   getItems(ev: any) {
     // set val to the value of the searchbar
     let val = ev.target.value;
@@ -43,9 +50,12 @@ export class HomePage implements OnInit {
   }
 
    refreshQoutes(refresher) {
-    setTimeout(() => {
-      this.getQoutes();
-      refresher.complete();
+    this.timer = setTimeout(() => {
+      this.qouteService.getQoutes()
+        .then(qoutes => {
+          this.qoutes = _.shuffle(qoutes);
+          refresher.complete();
+        });
     }, 2000);
   }
 
@@ -55,5 +65,9 @@ export class HomePage implements OnInit {
 
   openSharingOptions(qoute: Qoute) {
     this.socialShareService.shareQoute(qoute);
+  }
+
+  ngOnDestroy() {
+    clearTimeout(this.timer);
   }
 }
