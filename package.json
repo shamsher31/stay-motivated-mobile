@@ -34,7 +34,8 @@
     "cordova-plugin-inappbrowser",
     "cordova-plugin-x-socialsharing",
     "cordova-plugin-facebook4",
-    "twitter-connect-plugin"
+    "twitter-connect-plugin",
+    "cordova-plugin-network-information"
   ],
   "cordovaPlatforms": []
 }
