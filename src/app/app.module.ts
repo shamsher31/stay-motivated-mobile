@@ -17,7 +17,7 @@ import { LoadingService } from '../shared/loading.service';
 import { NetworkService } from '../shared/network.service';
 import { ErrorNotifierService } from '../shared/error.notifier';
 import { InterceptorService } from '../shared/interceptor.service';
-import { AppRequestOptions } from './app.request.options';
+import { AppRequestOptions, WEBAPI_URL_TOKEN } from './app.request.options';
 
 import { LoginService} from '../pages/login/login.service';
 import { QouteService} from '../pages/qoute/qoute.service';
@@ -85,7 +85,7 @@ export function httpFactory (
         LogService
       ]
     },
-    //{ provide: WEBAPI_URL_TOKEN, useValue: 'http://localhost:8100' },
+    { provide: WEBAPI_URL_TOKEN, useValue: 'http://localhost:8003' },
     { provide: RequestOptions, useClass: AppRequestOptions }
   ]
 })

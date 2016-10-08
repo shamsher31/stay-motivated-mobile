@@ -1,22 +1,17 @@
-import { Injectable } from '@angular/core';
-import {BaseRequestOptions, RequestOptions, RequestOptionsArgs} from '@angular/http';
+import { Injectable, Inject, OpaqueToken} from '@angular/core';
+import { BaseRequestOptions, RequestOptions, RequestOptionsArgs} from '@angular/http';
 
-//OpaqueToken, Inject
-//export const WEBAPI_URL_TOKEN = new OpaqueToken('webApiBaseUrl');
+export const WEBAPI_URL_TOKEN = new OpaqueToken('webApiBaseUrl');
 
 @Injectable() 
 export class AppRequestOptions extends BaseRequestOptions {
-  constructor() {
+  constructor(@Inject(WEBAPI_URL_TOKEN) public webApiBaseUrl:string) {
     super();
   }
-  // constructor(@Inject(WEBAPI_URL_TOKEN) public webApiBaseUrl:string) {
-  // 	super();
-  //   this.webApiBaseUrl = 'http://localhost:8100/';
-  // 	console.log('webApiBaseUrl = '+webApiBaseUrl);
-  // }
 
   merge(options?:RequestOptionsArgs):RequestOptions {
-    //options.url = this.webApiBaseUrl + options.url;
+    options.url = (this.webApiBaseUrl ? this.webApiBaseUrl :
+      'http://localhost:8003') + options.url;
     return super.merge(options);
   }
 }

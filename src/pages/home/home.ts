@@ -27,7 +27,7 @@ export class HomePage implements OnInit, OnDestroy {
   getQoutes() {
     this.loadingService.showSearchLoader();
     this.qouteService.getQoutes()
-        .then(qoutes => {
+        .subscribe(qoutes => {
           this.qoutes = _.shuffle(qoutes);
           this.loadingService.hideSearchLoader();
         });
@@ -50,7 +50,7 @@ export class HomePage implements OnInit, OnDestroy {
    refreshQoutes(refresher) {
     this.timer = setTimeout(() => {
       this.qouteService.getQoutes()
-        .then(qoutes => {
+        .subscribe(qoutes => {
           this.qoutes = _.shuffle(qoutes);
           refresher.complete();
         });

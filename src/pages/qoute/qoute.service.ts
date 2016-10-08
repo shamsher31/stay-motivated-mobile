@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Http, URLSearchParams, Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+
 import { Qoute} from './qoute';
-import { QOUTES } from './mock-qoutes';
 
 @Injectable()
 export class QouteService {
-  getQoutes() :Promise<Qoute[]> {
-    return Promise.resolve(QOUTES);
+  constructor(public http: Http ) {}
+
+  getQoutes(): Observable<Qoute[]> {
+    return this.http.get('/qoutes/')
+      .map((res:Response) => res.json())
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 }
