@@ -26,14 +26,25 @@ export class LoadingService implements OnDestroy {
       content: this.getRandomeMsg(),
       dismissOnPageChange: true
     });
-
     this.loading.present();
   }
 
   hideSearchLoader() {
     this.timer = setTimeout(() => {
       this.loading.dismiss();
-    }, 4000);
+    }, 3000);
+  }
+
+  showPreloader() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Loading...',
+      dismissOnPageChange: true
+    });
+    this.loading.present();
+  }
+
+  hidePreloader() {
+    this.loading.dismiss();
   }
 
   ngOnDestroy() {

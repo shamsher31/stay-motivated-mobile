@@ -16,20 +16,10 @@ export class ToastService {
   
   public showToast(message?: string, duration?: number, position?: string ) {
 
-    if (!message) {
-      message = this.defaultMessage;
-    }
-    if (!duration) {
-      duration = this.defaultDuration;
-    }
-    if (!position) {
-      position = this.defaultPosition;
-    }
-
     let toast = this.toastCtrl.create({
-      message: message,
-      duration: duration,
-      position: position
+      message: message || this.defaultMessage,
+      duration: duration || this.defaultDuration,
+      position: position || this.defaultPosition
     });
     toast.present();
 

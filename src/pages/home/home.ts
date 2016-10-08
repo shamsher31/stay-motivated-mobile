@@ -1,5 +1,5 @@
-import {Component, OnInit, OnDestroy } from '@angular/core';
-import {NavController} from 'ionic-angular';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NavController } from 'ionic-angular';
 import { SocialShareService } from '../../shared/social-share.service';
 import { LoadingService } from '../../shared/loading.service';
 import { QouteService } from '../qoute/qoute.service';
@@ -34,10 +34,8 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   getItems(ev: any) {
-    // set val to the value of the searchbar
     let val = ev.target.value;
 
-    // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.qoutes = this.qoutes.filter((item) => {
         return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
