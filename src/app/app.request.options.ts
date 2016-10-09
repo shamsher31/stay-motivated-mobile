@@ -11,7 +11,7 @@ export class AppRequestOptions extends BaseRequestOptions {
 
   merge(options?:RequestOptionsArgs):RequestOptions {
     options.url = (this.webApiBaseUrl ? this.webApiBaseUrl :
-      'http://localhost:8003') + options.url;
+      'http://192.168.43.108:8003') + options.url;
     return super.merge(options);
   }
 }

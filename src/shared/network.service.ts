@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Platform} from 'ionic-angular';
 import { ToastService } from './toast.service';
+import _ from 'lodash';
  
 declare var navigator: any;
 declare var Connection: any;
@@ -17,7 +18,9 @@ export class NetworkService {
       var states = {};
       states[Connection.UNKNOWN]  = 'Unknown connection';
       states[Connection.NONE]     = 'No network connection';
-      this.toastService.showToast(states[networkState]);
+      if (!_.isEmpty(states[networkState])) {
+        this.toastService.showToast(states[networkState]);
+      }
     });
   }
 }

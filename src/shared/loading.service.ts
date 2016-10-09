@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { LoadingController } from 'ionic-angular';
+import _ from 'lodash';
 
 @Injectable()
 export class LoadingService implements OnDestroy {
@@ -21,23 +22,10 @@ export class LoadingService implements OnDestroy {
     return this.searchMsg[Math.floor(Math.random() * this.searchMsg.length)];
   }
 
-  showSearchLoader() {
+  showPreloader(url?: string) {
+    let loadingMsg = _.includes(url, 'qoutes') ? this.getRandomeMsg() : 'Loading...'; 
     this.loading = this.loadingCtrl.create({
-      content: this.getRandomeMsg(),
-      dismissOnPageChange: true
-    });
-    this.loading.present();
-  }
-
-  hideSearchLoader() {
-    this.timer = setTimeout(() => {
-      this.loading.dismiss();
-    }, 3000);
-  }
-
-  showPreloader() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Loading...',
+      content: loadingMsg,
       dismissOnPageChange: true
     });
     this.loading.present();
@@ -48,6 +36,6 @@ export class LoadingService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    clearTimeout(this.timer);
+    this.loading = null;
   }
 }

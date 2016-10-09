@@ -1,4 +1,3 @@
-import {Injectable} from '@angular/core';
 import {
   Http,
   ConnectionBackend,
@@ -14,8 +13,7 @@ import { LoadingService } from './loading.service';
 import { NetworkService } from './network.service';
 import { LogService } from './log.service';
 
-@Injectable()
-export class InterceptorService extends Http {
+export class HttpInterceptor extends Http {
   
   retryInterval: number;
   timeoutInterval: number;
@@ -35,7 +33,6 @@ export class InterceptorService extends Http {
   request(url: string | Request, options?: RequestOptionsArgs): Observable<any> {
     LogService.log('Before the request...');
     this.loadingService.showPreloader();
-    this.networkService.checkNetwork();
     return super.request(url, options)
         .catch((err: any): any => {
           this.errorService.notifyError(err);
@@ -46,13 +43,13 @@ export class InterceptorService extends Http {
         .finally(() => {
           LogService.log('After the request...');
           this.loadingService.hidePreloader();
+          this.networkService.checkNetwork();
         });
   }
 
   get(url: string, options?: RequestOptionsArgs): Observable<any> {
     LogService.log('Before the request...');
-    this.loadingService.showPreloader();
-    this.networkService.checkNetwork();
+    this.loadingService.showPreloader(url);
     return super.get(url, options)
         .catch((err: any): any => {
           if (err.status === 400 || err.status === 422) {
@@ -67,13 +64,13 @@ export class InterceptorService extends Http {
         .finally(() => {
           LogService.log('After the request...');
           this.loadingService.hidePreloader();
+          this.networkService.checkNetwork();
         });
   }
 
   post(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
     LogService.log('Before the request...');
     this.loadingService.showPreloader();
-    this.networkService.checkNetwork();
     return super.post(url, body, options)
         .catch((err: any): any => {
           if (err.status === 400 || err.status === 422) {
@@ -86,6 +83,7 @@ export class InterceptorService extends Http {
         .finally(() => {
           LogService.log('After the request...');
           this.loadingService.hidePreloader();
+          this.networkService.checkNetwork();
         });
   }
 

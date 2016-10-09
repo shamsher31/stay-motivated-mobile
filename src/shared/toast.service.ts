@@ -15,14 +15,11 @@ export class ToastService {
   }
   
   public showToast(message?: string, duration?: number, position?: string ) {
-
     let toast = this.toastCtrl.create({
       message: message || this.defaultMessage,
       duration: duration || this.defaultDuration,
       position: position || this.defaultPosition
     });
     toast.present();
-
   }
-  
 }

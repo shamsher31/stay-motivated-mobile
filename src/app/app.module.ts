@@ -16,7 +16,7 @@ import { SocialShareService } from '../shared/social-share.service';
 import { LoadingService } from '../shared/loading.service';
 import { NetworkService } from '../shared/network.service';
 import { ErrorNotifierService } from '../shared/error.notifier';
-import { InterceptorService } from '../shared/interceptor.service';
+import { HttpInterceptor } from '../shared/http.interceptor';
 import { AppRequestOptions, WEBAPI_URL_TOKEN } from './app.request.options';
 
 import { LoginService} from '../pages/login/login.service';
@@ -32,7 +32,7 @@ export function httpFactory (
   loadingService: LoadingService,
   networkService: NetworkService,
   logService: LogService) {
-    return new InterceptorService(
+    return new HttpInterceptor(
       backend,
       defaultOptions,
       errorNotifier,
@@ -71,7 +71,6 @@ export function httpFactory (
     SocialShareService,
     LoadingService,
     NetworkService,
-    InterceptorService,
     ErrorNotifierService,
     {
       provide:Http,
@@ -85,7 +84,7 @@ export function httpFactory (
         LogService
       ]
     },
-    { provide: WEBAPI_URL_TOKEN, useValue: 'http://localhost:8003' },
+    { provide: WEBAPI_URL_TOKEN, useValue: 'http://192.168.43.108:8003' },
     { provide: RequestOptions, useClass: AppRequestOptions }
   ]
 })

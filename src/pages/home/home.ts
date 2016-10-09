@@ -12,7 +12,6 @@ import _ from 'lodash';
 export class HomePage implements OnInit, OnDestroy {
 
   qoutes: Qoute[];
-  public timer: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -25,36 +24,30 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   getQoutes() {
-    this.loadingService.showSearchLoader();
     this.qouteService.getQoutes()
-        .subscribe(qoutes => {
-          this.qoutes = _.shuffle(qoutes);
-          this.loadingService.hideSearchLoader();
-        });
+      .subscribe(qoutes => {
+        this.qoutes = _.shuffle(qoutes);
+      });
   }
 
   getItems(ev: any) {
     let val = ev.target.value;
-
     if (val && val.trim() != '') {
       this.qoutes = this.qoutes.filter((item) => {
         return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
-
     if (val == '') {
       this.getQoutes();
     }
   }
 
-   refreshQoutes(refresher) {
-    this.timer = setTimeout(() => {
-      this.qouteService.getQoutes()
-        .subscribe(qoutes => {
-          this.qoutes = _.shuffle(qoutes);
-          refresher.complete();
-        });
-    }, 2000);
+  refreshQoutes(refresher) {
+    this.qouteService.getQoutes()
+      .subscribe(qoutes => {
+        this.qoutes = _.shuffle(qoutes);
+        refresher.complete();
+      });
   }
 
   trackByQoutesId(index: number, qoute: Qoute) {
@@ -66,6 +59,6 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    clearTimeout(this.timer);
+    this.qoutes = [];
   }
 }
